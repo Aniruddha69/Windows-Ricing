@@ -275,7 +275,7 @@ function docs {
 }
 
 function Update-Profile {
-    Invoke-RestMethod https://github.com/Aniruddha69/Terminal/raw/main/setup.ps1 | Invoke-Expression
+    Invoke-RestMethod https://github.com/Aniruddha69/Windows-Ricing/raw/main/Terminal/setup.ps1 | Invoke-Expression
 }
 
 # Help Function
