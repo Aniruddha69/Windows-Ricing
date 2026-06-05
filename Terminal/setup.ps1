@@ -50,7 +50,17 @@ Remove-Item -Path $temp_file -Force
 }
 
 # 1. Download and Install JetBrainsMono Nerd Font
-Write-Host "Downloading JetBrainsMono Nerd Font..." -ForegroundColor Cyan
+$registryKey = "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts"
+
+Write-Host "Checking if JetBrainsMono Nerd Font is already installed..." -ForegroundColor Cyan
+$fontInstalled = Get-ItemProperty -Path $registryKey -ErrorAction SilentlyContinue | 
+                 Get-Member -MemberType Properties | 
+                 Where-Object { $_.Name -like "*JetBrainsMono*" }
+
+if ($fontInstalled) {
+    Write-Host "JetBrainsMono Nerd Font is already installed. Skipping download!" -ForegroundColor Green
+} 
+else {
 $fontUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 $tempZip = Join-Path $env:TEMP "JetBrainsMono.zip"
 $tempExtract = Join-Path $env:TEMP "JetBrainsMono_Extract"
@@ -76,7 +86,7 @@ foreach ($font in $fonts) {
     $fontName = $font.BaseName + " (TrueType)"
     Set-ItemProperty -Path $registryKey -Name $fontName -Value $destPath -Force
 }
-
+}
 # Cleanup font temp files
 Remove-Item -Path $tempZip -Force
 Remove-Item -Path $tempExtract -Recurse -Force
