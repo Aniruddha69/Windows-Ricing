@@ -149,7 +149,7 @@ $configContent = @'
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
       "type": "file",
-      "source": "%USERNAME%/.config/fastfetch/ascii.txt",
+      "source": "~/.config/fastfetch/ascii.txt",
       "color": {
         "1": "#FFFFFF",
         "2": "#F2CDCD",
@@ -488,7 +488,7 @@ function Show-Help {
   ${command}winutildev${reset}         ${accent}→${reset} ${desc}Run WinUtil Dev${reset}
 
   ${dim}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${reset}
-  "@
+"@
 }
 
 Clear-host
