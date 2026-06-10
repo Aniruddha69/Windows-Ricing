@@ -6,46 +6,51 @@ $progressPreference = 'silentlyContinue'
 
 Write-Host "Checking if winget is already installed..." -ForegroundColor Cyan
 
-if (Get-Command winget -ErrorAction SilentlyContinue) {
+if (Get-Command winget -ErrorAction SilentlyContinue)
+{
   Write-Host "Winget is already installed!" -ForegroundColor Green
-    $version = winget --version
-    Write-Host "Version: $version"
+  $version = winget --version
+  Write-Host "Version: $version"
 }
 
-else {
+else
+{
   Write-Host "Winget not found. Fetching the latest release from GitHub..." -ForegroundColor Yellow
 
-# Enforce TLS 1.2 for the web request
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  # Enforce TLS 1.2 for the web request
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-# Get the latest release data from the winget-cli repository
-    $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
-      $response = Invoke-RestMethod -Uri $releases_url
+  # Get the latest release data from the winget-cli repository
+  $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+  $response = Invoke-RestMethod -Uri $releases_url
 
-# Find the .msixbundle asset
-      $asset = $response.assets | Where-Object { $_.name -match "\.msixbundle$" }
+  # Find the .msixbundle asset
+  $asset = $response.assets | Where-Object { $_.name -match "\.msixbundle$" }
 
-  if (-not $asset) {
+  if (-not $asset)
+  {
     Write-Error "Could not find the winget.msixbundle in the latest release."
   }
 
   $download_url = $asset.browser_download_url
-    $temp_file = "$env:TEMP\$($asset.name)"
+  $temp_file = "$env:TEMP\$($asset.name)"
 
-    Write-Host "Downloading winget from $($download_url)..." -ForegroundColor Cyan
-    Invoke-WebRequest -Uri $download_url -OutFile $temp_file
+  Write-Host "Downloading winget from $($download_url)..." -ForegroundColor Cyan
+  Invoke-WebRequest -Uri $download_url -OutFile $temp_file
 
-    Write-Host "Installing winget (App Installer)..." -ForegroundColor Cyan
-    Add-AppxPackage -Path $temp_file
+  Write-Host "Installing winget (App Installer)..." -ForegroundColor Cyan
+  Add-AppxPackage -Path $temp_file
 
-# Verify installation
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-      Write-Host "Successfully installed winget!" -ForegroundColor Green
-    } else {
-      Write-Host "Installation completed, but you may need to restart your terminal or PC to use the 'winget' command." -ForegroundColor Yellow
-    }
+  # Verify installation
+  if (Get-Command winget -ErrorAction SilentlyContinue)
+  {
+    Write-Host "Successfully installed winget!" -ForegroundColor Green
+  } else
+  {
+    Write-Host "Installation completed, but you may need to restart your terminal or PC to use the 'winget' command." -ForegroundColor Yellow
+  }
 
-# Clean up
+  # Clean up
   Remove-Item -Path $temp_file -Force
 }
 
@@ -54,43 +59,49 @@ $registryKey = "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts"
 
 Write-Host "Checking if JetBrainsMono Nerd Font is already installed..." -ForegroundColor Cyan
 $fontInstalled = Get-ItemProperty -Path $registryKey -ErrorAction SilentlyContinue | 
-Get-Member -MemberType Properties | 
-Where-Object { $_.Name -like "*JetBrainsMono*" }
+  Get-Member -MemberType Properties | 
+  Where-Object { $_.Name -like "*JetBrainsMono*" }
 
-if ($fontInstalled) {
+if ($fontInstalled)
+{
   Write-Host "JetBrainsMono Nerd Font is already installed. Skipping download!" -ForegroundColor Green
-} 
-else {
+} else
+{
   $fontUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    $tempZip = Join-Path $env:TEMP "JetBrainsMono.zip"
-    $tempExtract = Join-Path $env:TEMP "JetBrainsMono_Extract"
+  $tempZip = Join-Path $env:TEMP "JetBrainsMono.zip"
+  $tempExtract = Join-Path $env:TEMP "JetBrainsMono_Extract"
 
-    Invoke-WebRequest -Uri $fontUrl -OutFile $tempZip
+  Invoke-WebRequest -Uri $fontUrl -OutFile $tempZip
 
-    Write-Host "Extracting and installing fonts (this may take a moment)..." -ForegroundColor Cyan
-    if (Test-Path $tempExtract) { Remove-Item -Path $tempExtract -Recurse -Force }
+  Write-Host "Extracting and installing fonts (this may take a moment)..." -ForegroundColor Cyan
+  if (Test-Path $tempExtract)
+  { Remove-Item -Path $tempExtract -Recurse -Force 
+  }
   Expand-Archive -Path $tempZip -DestinationPath $tempExtract -Force
 
-# Define the user-level fonts directory
-    $fontFolder = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
-    if (-not (Test-Path $fontFolder)) { New-Item -ItemType Directory -Path $fontFolder -Force | Out-Null }
+  # Define the user-level fonts directory
+  $fontFolder = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+  if (-not (Test-Path $fontFolder))
+  { New-Item -ItemType Directory -Path $fontFolder -Force | Out-Null 
+  }
 
-# Install each .ttf file and register it in the Current User registry
+  # Install each .ttf file and register it in the Current User registry
   $fonts = Get-ChildItem -Path $tempExtract -Filter *.ttf -Recurse
-    $registryKey = "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts"
+  $registryKey = "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts"
 
-    foreach ($font in $fonts) {
-      $destPath = Join-Path $fontFolder $font.Name
-        Copy-Item -Path $font.FullName -Destination $destPath -Force
+  foreach ($font in $fonts)
+  {
+    $destPath = Join-Path $fontFolder $font.Name
+    Copy-Item -Path $font.FullName -Destination $destPath -Force
 
-        $fontName = $font.BaseName + " (TrueType)"
-        Set-ItemProperty -Path $registryKey -Name $fontName -Value $destPath -Force
-    }
+    $fontName = $font.BaseName + " (TrueType)"
+    Set-ItemProperty -Path $registryKey -Name $fontName -Value $destPath -Force
+  }
 
-# Cleanup font temp files
+  # Cleanup font temp files
   Remove-Item -Path $tempZip -Force
-    Remove-Item -Path $tempExtract -Recurse -Force
-    Write-Host "Font installation complete!" -ForegroundColor Green
+  Remove-Item -Path $tempExtract -Recurse -Force
+  Write-Host "Font installation complete!" -ForegroundColor Green
 }
 # 2. Install Git, PowerShell 7, and Fastfetch using Winget
 Write-Host "`nInstalling Git, PowerShell 7, and Fastfetch..." -ForegroundColor Cyan
@@ -107,24 +118,28 @@ $psProfileDir = Join-Path $homeDir "Documents\PowerShell"
 $wtSettingsPath = Join-Path $homedir "AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 $ohmyposhDir = Join-path $configDir "Oh-My-Posh"
 # 4. Create the directories and hide .config
-if (-not (Test-Path $configDir)) {
+if (-not (Test-Path $configDir))
+{
   Write-Host "Creating hidden .config directory..."
-    New-Item -Path $configDir -ItemType Directory -Force | Out-Null
-    (Get-Item $configDir).Attributes += 'Hidden'
+  New-Item -Path $configDir -ItemType Directory -Force | Out-Null
+  (Get-Item $configDir).Attributes += 'Hidden'
 }
-if (-not (Test-Path $fastfetchDir)) {
+if (-not (Test-Path $fastfetchDir))
+{
   Write-Host "Creating fastfetch directory inside .config..."
-    New-Item -Path $fastfetchDir -ItemType Directory -Force | Out-Null
+  New-Item -Path $fastfetchDir -ItemType Directory -Force | Out-Null
 }
 
-if (-not (Test-Path $psProfileDir)) {
+if (-not (Test-Path $psProfileDir))
+{
   Write-Host "Creating PowerShell directory in Documents..."
-    New-Item -Path $psProfileDir -ItemType Directory -Force | Out-Null
+  New-Item -Path $psProfileDir -ItemType Directory -Force | Out-Null
 }
 
-if (-not(Test-Path $ohmyposhDir)) {
+if (-not(Test-Path $ohmyposhDir))
+{
   Write-Host "Creating Oh-My-Posh directory inside .config..."
-    New-Item -Path $ohmyposhDir -ItemType File -Force | Out-Null 
+  New-Item -Path $ohmyposhDir -ItemType File -Force | Out-Null 
 }
 
 # 5. Write config.jsonc
@@ -236,15 +251,7 @@ Write-Host "Writing Oh-My-Posh configrations"
 $ohmyposhContent = @'
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-    "white-blue": "#a9b1d6",
-    "blue-bell": "#9aa5ce",
-    "pastal-grey": "#cfc9c2",
-    "terminal-magenta": "#bb9af7",
-    "blue-black": "#565f89",
-    "terminal-black": "#414868",
-    "t-background": "p:main-bg"
-  },
-  "blocks": [
+    "console_title_template": " {{ .Folder }} :: {{if .Root}}Admin{{end}}",
     "palette": {
       "main-bg": "#24283b",
       "terminal-red": "#f7768e",
@@ -687,9 +694,11 @@ $wtSettingsContent = @'
 }
 '@
 
-if (Test-Path -Path $wtSettingsPath -IsValid) {
+if (Test-Path -Path $wtSettingsPath -IsValid)
+{
   Set-Content -Path $wtSettingsPath -Value $wtSettingsContent -Encoding UTF8 -Force
-} else {
+} else
+{
   Write-Host "Windows Terminal settings path not found. Please ensure Windows Terminal is installed." -ForegroundColor Red
 }
 
@@ -699,15 +708,19 @@ Write-Host "Adding Git Unix tools to Environment PATH..." -ForegroundColor Cyan
 $gitUsrBin = "C:\Program Files\Git\usr\bin"
 $currentPath = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::User)
 
-if (Test-Path $gitUsrBin) {
-  if ($currentPath -notlike "*$gitUsrBin*") {
+if (Test-Path $gitUsrBin)
+{
+  if ($currentPath -notlike "*$gitUsrBin*")
+  {
     $newPath = $currentPath + ";" + $gitUsrBin
-      [Environment]::SetEnvironmentVariable("Path", $newPath, [EnvironmentVariableTarget]::User)
-      Write-Host "Successfully added $gitUsrBin to User PATH." -ForegroundColor Green
-  } else {
+    [Environment]::SetEnvironmentVariable("Path", $newPath, [EnvironmentVariableTarget]::User)
+    Write-Host "Successfully added $gitUsrBin to User PATH." -ForegroundColor Green
+  } else
+  {
     Write-Host "Git Unix tools are already in your PATH." -ForegroundColor Yellow
   }
-} else {
+} else
+{
   Write-Host "Git usr\bin not found. Ensure Git is installed via winget first." -ForegroundColor Red
 }
 #11 
@@ -722,7 +735,8 @@ $repoUrl = "https://github.com/Aniruddha69/Windows-Ricing.git"
 
 #12 Create the target directory if it doesn't exist
 
-if (-not (Test-Path -Path $targetDir)) {
+if (-not (Test-Path -Path $targetDir))
+{
 
   New-Item -ItemType Directory -Path $targetDir -Force
 
@@ -731,7 +745,8 @@ if (-not (Test-Path -Path $targetDir)) {
 
 # Remove temp dir if it already exists from a previous failed run
 
-if (Test-Path -Path $tempRepoDir) {
+if (Test-Path -Path $tempRepoDir)
+{
 
   Remove-Item -Path $tempRepoDir -Recurse -Force
 
@@ -750,17 +765,19 @@ git clone --depth 1 $repoUrl $tempRepoDir
 $sourceFolder = Join-Path $tempRepoDir "Terminal\PowerShell\Modules"
 
 
-if (Test-Path -Path $sourceFolder) {
+if (Test-Path -Path $sourceFolder)
+{
 
-# Move the module folder to Documents\PowerShell
+  # Move the module folder to Documents\PowerShell
 
-# Use -Force to overwrite if it already exists
+  # Use -Force to overwrite if it already exists
 
   Copy-Item -Path $sourceFolder -Destination $targetDir -Recurse -Force
 
-    Write-Host "Success: 'module' has been placed in $targetDir" -ForegroundColor Green
+  Write-Host "Success: 'module' has been placed in $targetDir" -ForegroundColor Green
 
-} else {
+} else
+{
 
   Write-Error "Could not find the 'module' folder at $sourceFolder. Please check the folder path inside the repository."
 
