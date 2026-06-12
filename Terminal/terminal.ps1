@@ -8,50 +8,15 @@ Write-Host "Checking if winget is already installed..." -ForegroundColor Cyan
 
 if (Get-Command winget -ErrorAction SilentlyContinue)
 {
-  Write-Host "Winget is already installed!" -ForegroundColor Green
+  Write-Host "Winget is installed!" -ForegroundColor Green
   $version = winget --version
   Write-Host "Version: $version"
 }
 
 else
 {
-  Write-Host "Winget not found. Fetching the latest release from GitHub..." -ForegroundColor Yellow
-
-  # Enforce TLS 1.2 for the web request
-  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-  # Get the latest release data from the winget-cli repository
-  $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
-  $response = Invoke-RestMethod -Uri $releases_url
-
-  # Find the .msixbundle asset
-  $asset = $response.assets | Where-Object { $_.name -match "\.msixbundle$" }
-
-  if (-not $asset)
-  {
-    Write-Error "Could not find the winget.msixbundle in the latest release."
-  }
-
-  $download_url = $asset.browser_download_url
-  $temp_file = "$env:TEMP\$($asset.name)"
-
-  Write-Host "Downloading winget from $($download_url)..." -ForegroundColor Cyan
-  Invoke-WebRequest -Uri $download_url -OutFile $temp_file
-
-  Write-Host "Installing winget (App Installer)..." -ForegroundColor Cyan
-  Add-AppxPackage -Path $temp_file
-
-  # Verify installation
-  if (Get-Command winget -ErrorAction SilentlyContinue)
-  {
-    Write-Host "Successfully installed winget!" -ForegroundColor Green
-  } else
-  {
-    Write-Host "Installation completed, but you may need to restart your terminal or PC to use the 'winget' command." -ForegroundColor Yellow
-  }
-
-  # Clean up
-  Remove-Item -Path $temp_file -Force
+ Write-Host " winget package manager is not installed! " 'ForegroundColor Red
+ exit 
 }
 
 # 1. Download and Install JetBrainsMono Nerd Font
@@ -115,7 +80,6 @@ $homeDir = $HOME
 $configDir = Join-Path $homeDir ".config"
 $DocsDir = Join-Path $homeDir "Documents"
 $wtSettingsPath = Join-Path $homedir "AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-$temprepo
 # 4. Create the directories and hide .config
 if (-not (Test-Path $configDir))
 {
@@ -131,6 +95,9 @@ Move-Item -Path "$env:TEMP\Windows-Ricing\Terminal\PowerShell" -Destination "$Do
 Move-Item -Path "$env:TEMP\Windows-Ricing\Terminal\Oh-My-Posh" -Destination "$configDir"
 Move-Item -Path "$env:TEMP\Windows-Ricing\Terminal\fastfetch" -Destination "$configDir"
 
+# Clean up
+Remove-Item -Path "$env:TEMP\Windows-Ricing" -Force
+  
 # 7. Overwrite Windows Terminal settings.json
 Write-Host "Overwriting Windows Terminal settings.json..."
 $wtSettingsContent = @'
