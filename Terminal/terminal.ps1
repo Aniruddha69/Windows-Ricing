@@ -15,8 +15,8 @@ if (Get-Command winget -ErrorAction SilentlyContinue)
 
 else
 {
-  Write-Host " winget package manager is not installed! " 'ForegroundColor Red
-    exit 
+  Write-Host " winget package manager is not installed! " -ForegroundColor Red
+  exit 1
 }
 
 # 1. Download and Install JetBrainsMono Nerd Font
@@ -96,7 +96,7 @@ if (!(Test-Path $repo)) {
 $source1 = Join-Path $repo "Terminal\PowerShell"
 $source2 = Join-Path $repo "Terminal\Oh-My-Posh"
 $source3 = Join-Path $repo "Terminal\fastfetch"
-$source4 = Join-Path $repo "Terminal\Terminal"
+$source4 = Join-Path $repo "Terminal\Terminal\settings.json"
 
 if (Test-Path $source1) { Move-Item -Path $source1 -Destination $DocsDir -Force }
 if (Test-Path $source2) { Move-Item -Path $source2 -Destination $configDir -Force }
@@ -105,14 +105,6 @@ if (Test-Path $source4) { Move-Item -Path $source4 -Destination $wtSettingsPath 
 # Clean up
 
 Remove-Item -Path "$env:TEMP\Windows-Ricing" -Force
-
-if (Test-Path -Path $wtSettingsPath -IsValid)
-{
-  Set-Content -Path $wtSettingsPath -Value $wtSettingsContent -Encoding UTF8 -Force
-} else
-{
-  Write-Host "Windows Terminal settings path not found. Please ensure Windows Terminal is installed." -ForegroundColor Red
-}
 
 
 #10 Add Git's Unix tools (usr\bin) to the PATH environment variable

@@ -94,16 +94,12 @@ ${dim}━━━━━━━━━━━━━━━━━━━━━━━━�
 "@
 }
 # Minimal profile: UTF‑8 + Oh My Posh (if installed) + Fastfetch with explicit config path
-try {
-    [Console]::InputEncoding  = [System.Text.Encoding]::UTF8
-    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-    $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
-    chcp 65001 > $null
-} catch {}
-
 Clear-host
 
 # Force Fastfetch to use YOUR config every time (bypass path confusion)
 if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
     fastfetch -c "$HOME/.config/fastfetch/config.jsonc"
 }
+
+oh-my-posh init pwsh --config '~/.config/Oh-My-Posh/tokyonight.omp.json'| Invoke-Expression
+
