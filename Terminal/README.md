@@ -46,7 +46,7 @@ This setup script automates the transformation of your Windows Terminal into a p
 1. Run the setup script:
 
 ```powershell
-   irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/Terminal/setup.ps1 | iex
+   irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/Terminal/Terminal.ps1 | iex
    ```
 
 2. **Restart Windows Terminal** to see the changes.
