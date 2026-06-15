@@ -20,7 +20,7 @@
 </p>
 
 > [!NOTE]
->  It changes resirtry key to register font files it in the Current User registry
+>  It changes registry key to register font files it in the Current User registry
 
 ## 🚀 Features
 
