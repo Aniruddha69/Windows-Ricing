@@ -67,7 +67,7 @@ function docs {
 }
 
 function Update-Profile {
-    Invoke-RestMethod https://github.com/Aniruddha69/Terminal/raw/main/setup.ps1 | Invoke-Expression
+    Invoke-RestMethod https://github.com/Aniruddha69/Terminal/raw/main/terminal.ps1 | Invoke-Expression
 }
 # Help Function
 function Show-Help {
