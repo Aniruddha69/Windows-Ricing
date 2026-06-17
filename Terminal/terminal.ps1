@@ -97,6 +97,21 @@ $source1 = Join-Path $repo "Terminal\PowerShell"
 $source2 = Join-Path $repo "Terminal\Oh-My-Posh"
 $source3 = Join-Path $repo "Terminal\fastfetch"
 $source4 = Join-Path $repo "Terminal\Terminal\settings.json"
+$PowershellDir = Join-Path $DocsDir "PowerShell"
+$OhMyPoshDir = Join-Path $configDir "Oh-My-Posh"
+$FastfetchDir = Join-Path $configDir "fastfetch"
+
+if (Test-Path $PowershellDir) {
+    Remove-Item $PowershellDir -Recurse -Force
+}
+
+if (Test-Path $FastfetchDir) {
+    Remove-Item $FastfetchDir -Recurse -Force
+}
+
+if (Test-Path $OhMyPoshDir) {
+    Remove-Item $OhMyPoshDi -Recurse -Force
+}
 
 if (Test-Path $source1) { Move-Item -Path $source1 -Destination $DocsDir -Force }
 if (Test-Path $source2) { Move-Item -Path $source2 -Destination $configDir -Force }
