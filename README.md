@@ -63,6 +63,8 @@ Windows-Ricing/
  
 </pre>
 
+* `LICENSE`: MIT License.
+
  ---
 
 ## 📑 Table of Contents
