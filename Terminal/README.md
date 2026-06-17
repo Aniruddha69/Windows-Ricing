@@ -5,7 +5,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/OS-Windows-blue?style=flat-square\&logo=windows" alt="Windows">
   <img src="https://img.shields.io/badge/Shell-PowerShell-blue?style=flat-square\&logo=powershell" alt="PowerShell">
-  <img src="https://img.shields.io/badge/Theme-Catppuccin-ABE9B3?style=flat-square" alt="Catppuccin">
 </p>
 
 \---
@@ -27,7 +26,7 @@
 This setup script automates the transformation of your Windows Terminal into a productive and beautiful environment:
 
 * **📦 Automated Installation**: Installs PowerShell 7 and Fastfetch using `winget`.
-* **🎨 Catppuccin Mocha Theme**: Pre-configured color scheme for a modern, soft look.
+* **🎨 TokyoNight Theme**: Pre-configured color scheme for a modern, soft look.
 * **✨ Custom Fastfetch**: Includes a unique ASCII art logo and system info layout.
 * **⌨️ Enhanced PowerShell Profile**:
 
