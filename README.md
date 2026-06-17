@@ -11,6 +11,60 @@ A complete guide to my Windows 11 customization – from the YASB bar to all the
 
 ---
 
+## File Structure
+
+<pre>
+
+Windows-Ricing/  
+├── .gitattributes  
+├── LICENSE  
+├── README.md  
+├── Terminal/  
+│   ├── fastfetch/  
+│   │   ├── ascii.txt  
+│   │   └── config.jsonc  
+│   ├── Oh-My-Posh/  
+│   │   └── tokyonight.omp.json  
+│   ├── PowerShell/  
+│   │   ├── Modules/  
+│   │   │   ├── Microsoft.PowerToys.Configure/  
+│   │   │   │   ├── 0.98.1.0/  
+│   │   │   │   │   ├── Microsoft.PowerToys.Configure.psd1  
+│   │   │   │   │   └── Microsoft.PowerToys.Configure.psm1  
+│   │   │   │   └── 0.99.1.0/  
+│   │   │   │       ├── Microsoft.PowerToys.Configure.psd1  
+│   │   │   │       └── Microsoft.PowerToys.Configure.psm1  
+│   │   │   └── Terminal-Icons/  
+│   │   │       └── 0.11.0/  
+│   │   │           ├── Data/  
+│   │   │           │   ├── colorThemes/  
+│   │   │           │   │   ├── devblackops_light.psd1  
+│   │   │           │   │   └── devblackops.psd1  
+│   │   │           │   ├── glyphs.ps1  
+│   │   │           │   └── iconThemes/  
+│   │   │           │       └── devblackops.psd1  
+│   │   │           ├── en-US/  
+│   │   │           │   └── Terminal-Icons-help.xml  
+│   │   │           ├── PSGetModuleInfo.xml  
+│   │   │           ├── Terminal-Icons.format.ps1xml  
+│   │   │           ├── Terminal-Icons.psd1  
+│   │   │           └── Terminal-Icons.psm1  
+│   │   └── profile.ps1  
+│   ├── README.md  
+│   ├── Resources/  
+│   │   ├── terminalexample1.png  
+│   │   └── terminalexample2.png  
+│   ├── Terminal/  
+│   │   └── settings.json  
+│   └── terminal.ps1  
+└── yasb/  
+    ├── config.yaml  
+    └── styles.css
+ 
+</pre>
+
+ ---
+
 ## 📑 Table of Contents
 
 | 📚 Entry | ✨ App |
