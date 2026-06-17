@@ -20,6 +20,10 @@ function uptime {
     (Get-Date) - (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime | Select-Object Days, Hours, Minutes, Seconds
 }
 
+function clf {
+  Clear-Host ; fastfetch.exe -c "$HOME/.config/fastfetch/config.jsonc"
+}
+
 function winutil {
     Invoke-RestMethod https://christitus.com/win | Invoke-Expression
 }
@@ -36,6 +40,16 @@ function gpush { git push }
 function gpull { git pull }
 function gcl { git clone $args }
 function g { __zoxide_z github }
+
+function y {
+	$tmp = (New-TemporaryFile).FullName
+	yazi.exe @args --cwd-file="$tmp"
+	$cwd = Get-Content -Path $tmp -Encoding UTF8
+	if ($cwd -and $cwd -ne $PWD.Path -and (Test-Path -LiteralPath $cwd -PathType Container)) {
+		Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path
+	}
+	Remove-Item -Path $tmp
+}
 
 function gcom {
     git add .
@@ -85,6 +99,7 @@ ${dim}────────────────────────�
 
 ${section}󰘴 System Shortcuts${reset}
 ${dim}────────────────────────────────────────────────────${reset}
+  ${command}clf${reset}                ${accent}→${reset} ${desc}clear and fastfetch${reset}  
   ${command}docs${reset}               ${accent}→${reset} ${desc}Documents folder${reset}
   ${command}uptime${reset}             ${accent}→${reset} ${desc}System uptime${reset}
   ${command}winutil${reset}            ${accent}→${reset} ${desc}Run WinUtil${reset}
@@ -93,7 +108,6 @@ ${dim}────────────────────────�
 ${dim}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${reset}
 "@
 }
-# Minimal profile: UTF‑8 + Oh My Posh (if installed) + Fastfetch with explicit config path
 Clear-host
 
 # Force Fastfetch to use YOUR config every time (bypass path confusion)
@@ -101,5 +115,6 @@ if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
     fastfetch -c "$HOME/.config/fastfetch/config.jsonc"
 }
 
+# Minimal profile: UTF‑8 + Oh My Posh (if installed) + Fastfetch with explicit config path
 oh-my-posh init pwsh --config '~/.config/Oh-My-Posh/tokyonight.omp.json'| Invoke-Expression
 
