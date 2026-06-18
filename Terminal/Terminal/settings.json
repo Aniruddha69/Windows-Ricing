@@ -104,18 +104,6 @@
         "hidden": false,
         "name": "PowerShell",
         "source": "Windows.Terminal.PowershellCore"
-      },
-      {
-        "guid": "{c9966ade-66df-515c-8f21-9102fcfb7298}",
-        "hidden": false,
-        "name": "Debian",
-        "source": "Microsoft.WSL"
-      },
-      {
-        "guid": "{340284be-218d-5be0-b638-26fc156f5c0e}",
-        "hidden": false,
-        "name": "archlinux",
-        "source": "Microsoft.WSL"
       }
     ]
   },
