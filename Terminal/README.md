@@ -11,11 +11,11 @@
 ## Pic of my Terminal
 
 <p align="center">
-  <img width="1243" height="671" alt="image" src="https://github.com/aniruddha69/windows-ricing/blob/main/Terminal/Resources/terminalexample1.png" />
+  <img width="1243" height="671" alt="image" src="https://github.com/aniruddha69/windows-ricing/raw/main/Terminal/Resources/terminalexample1.png" />
 </p>
 
 <p align="center">
-  <img width="1243" height="671" alt="image" src="https://github.com/aniruddha69/windows-ricing/blob/main/Terminal/Resources/terminalexample2.png" />
+  <img width="1243" height="671" alt="image" src="https://github.com/aniruddha69/windows-ricing/raw/main/Terminal/Resources/terminalexample2.png" />
 </p>
 
 > [!NOTE]

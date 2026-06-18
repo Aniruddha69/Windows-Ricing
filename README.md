@@ -121,6 +121,6 @@ You can follow the steps below, or jump to the [**setup video**](https://www.you
 - Remove the codes from the settings.json file in **your terminal** and paste the one you just copied from above. Do the same thing for your PowerShell profile.
 - Create a **.config** *hidden* file in your C:\Users\%USERPROFILE% and create a folder called **fastfetch** inside. Copy the config and ascii code you just downloaded and paste it in that folder.
 - Change the %USERPROFILE% from the config file in the fastfetch folder and the PowerShell profile with **your username**..
-- Restart your terminal and your done. If this feel complicated just watch the [**setup video**](https://www.youtube.com/watch?v=your-video-id).
+- Restart your terminal and your done. If this feel complicated just watch the [**setup video coming soon**].
 
 ---
