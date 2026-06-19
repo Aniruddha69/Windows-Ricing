@@ -15,7 +15,7 @@ if (Get-Command winget -ErrorAction SilentlyContinue)
 
 else
 {
-  Write-Host " winget package manager is not installed! " -ForegroundColor Red
+  Write-Host "Winget package manager is not installed!" -ForegroundColor Red
   exit 1
 }
 
