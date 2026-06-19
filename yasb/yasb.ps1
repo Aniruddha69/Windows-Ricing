@@ -26,17 +26,25 @@ if (!(Test-Path $repo)) {
 
 # defining directory in repo inside temp folder
 
-$source1 = Join-Path $repo "yasb/Config"
+$source1 = Join-Path $repo "yasb\Config\config.yaml"
+$source2 = Join-Path $repo "yasb\Config\styles.css"
 
 # cleaning previous intances and configs 
 
 if (Test-Path $yasbDir) {
     Remove-Item $yasbDir -Recurse -Force
+    New-Item -Path $yasbDir -ItemType Directory -Force | Out-Null
+}
+
+else {
+    New-Item -Path $configDir -ItemType Directory -Force | Out-Null
+    exit 1
 }
 
 # moving files from repo to .config directory
 
-if (Test-Path $source1) { Move-Item -Path $source1 -Destination $configDir -Force }
+if (Test-Path $source1) { Move-Item -Path $source1 -Destination $yasbDir -Force }
+if (Test-Path $source2) { Move-Item -Path $source2 -Destination $yasbDir -Force }
 
 # cleaning temp folder 
 
