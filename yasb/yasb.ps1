@@ -56,5 +56,5 @@ if (Test-Path $repo) {
 # Runing the Program
 
 Set-Location "C:\Program Files\YASB\"; .\yasb.exe
-Set-Location 
+Set-Location "~"
 
