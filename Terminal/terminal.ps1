@@ -1,8 +1,4 @@
 # Enable-Winget.ps1
-# This script installs or updates the Windows Package Manager (winget)
-
-$ErrorActionPreference = "Stop"
-$progressPreference = 'silentlyContinue'
 
 Write-Host "Checking if winget is already installed..." -ForegroundColor Cyan
 
