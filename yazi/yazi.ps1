@@ -30,4 +30,6 @@ winget install --id sharkdp.fd  --source winget --accept-package-agreements --ac
 winget install --id BurntSushi.ripgrep.MSVC  --source winget --accept-package-agreements --accept-source-agreements 
 winget install --id junegunn.fzf  --source winget --accept-package-agreements --accept-source-agreements 
 winget install --id ajeetdsouza.zoxide --source winget --accept-package-agreements --accept-source-agreements 
+winget install --id sxyazi.yazi --source winget --accept-package-agreements --accept-source-agreements 
+
 
