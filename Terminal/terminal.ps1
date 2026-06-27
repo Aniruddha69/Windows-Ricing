@@ -106,7 +106,7 @@ if (Test-Path $FastfetchDir) {
 }
 
 if (Test-Path $OhMyPoshDir) {
-    Remove-Item $OhMyPoshDi -Recurse -Force
+    Remove-Item $OhMyPoshDir -Recurse -Force
 }
 
 if (Test-Path $source1) { Move-Item -Path $source1 -Destination $DocsDir -Force }
