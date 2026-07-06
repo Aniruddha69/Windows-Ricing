@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform: Windows 11](https://img.shields.io/badge/Platform-Windows%2011-blue.svg)](https://www.microsoft.com/windows/windows-11)
 [![PowerShell: 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-green.svg)](https://docs.microsoft.com/en-us/powershell/)
-[![Status: Maintenance](https://img.shields.io/badge/Status-Maintenance-orange.svg)](https://github.com/yourusername/windows-ricing/yasb)
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com/yourusername/windows-ricing/yasb)
 
 A collection of PowerShell scripts designed to automate the process of setting up and customizing Windows 11 with a modern, sleek aesthetic.
 
