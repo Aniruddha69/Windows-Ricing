@@ -7,6 +7,19 @@
 
 A collection of PowerShell scripts designed to automate the process of setting up and customizing Windows 11 with a modern, sleek aesthetic.
 
+**Quick Links:**
+
+- 🏠 [Home](#-yasb---yet-another-sleek-bloatware)
+- 📋 [Overview](#-overview)
+- 🚀 [Installation](#-installation)
+- ▶️ [Usage](#️-usage)
+- ⚙️ [Configuration](#️-configuration)
+- ✨ [Features](#-features)
+- 🔧 [Troubleshooting](#-troubleshooting)
+- 💬 [Support](#-support)
+- 🤝 [Contributing](#-contributing)
+- 📄 [License](#-license)
+
 ## 📋 Overview
 
 yasb (Yet Another Sleek Bloatware) provides a comprehensive set of PowerShell scripts that help you:
@@ -109,15 +122,3 @@ This project follows the best practices for clean, maintainable PowerShell code.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-**Quick Links:**
-- 🏠 [Home](#-yasb---yet-another-sleek-bloatware)
-- 📋 [Overview](#-overview)
-- 🚀 [Installation](#-installation)
-- ▶️ [Usage](#️-usage)
-- ⚙️ [Configuration](#️-configuration)
-- ✨ [Features](#-features)
-- 🔧 [Troubleshooting](#-troubleshooting)
-- 💬 [Support](#-support)
-- 🤝 [Contributing](#-contributing)
-- 📄 [License](#-license)
