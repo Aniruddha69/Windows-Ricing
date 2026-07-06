@@ -16,6 +16,7 @@ A collection of PowerShell scripts designed to automate the process of setting u
 - ⚙️ [Configuration](#️-configuration)
 - ✨ [Features](#-features)
 - 🔧 [Troubleshooting](#-troubleshooting)
+- 📂 [File Structure](#-file-structure)
 - 💬 [Support](#-support)
 - 🤝 [Contributing](#-contributing)
 - 📄 [License](#-license)
@@ -86,10 +87,6 @@ You can customize the behavior of the scripts by editing the `yasb.ps1` file bef
 - 💻 Run PowerShell as Administrator
 - 📁 Navigate to the project directory first
 
-**🖼️ Custom wallpapers don't appear**
-- 📂 Ensure your wallpaper folder structure is correct
-- 🖼️ Check that the image files are in PNG/JPG format
-
 **🐌 System performance slows down**
 - ⏳ This is normal during initial setup
 - 🚀 The system will stabilize after all optimizations are applied
@@ -97,6 +94,18 @@ You can customize the behavior of the scripts by editing the `yasb.ps1` file bef
 **🔍 Features are missing**
 - 📋 Check the script output for error messages
 - 🪟 Verify your Windows 11 version supports the feature
+
+## 📂 File Structure
+<pre>
+  
+yasb/
+├── Config/
+│   ├── config.yaml
+│   └── styles.css
+├── README.md
+└── yasb.ps1
+
+</pre>
 
 ## 💬 Support
 
