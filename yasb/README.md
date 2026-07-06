@@ -11,7 +11,6 @@ A collection of PowerShell scripts designed to automate the process of setting u
 
 - 🏠 [Home](#-yasb---yet-another-sleek-bloatware)
 - 📋 [Overview](#-overview)
-- 🚀 [Installation](#-installation)
 - ▶️ [Usage](#️-usage)
 - ⚙️ [Configuration](#️-configuration)
 - ✨ [Features](#-features)
@@ -26,32 +25,15 @@ A collection of PowerShell scripts designed to automate the process of setting u
 yasb (Yet Another Sleek Bloatware) provides a comprehensive set of PowerShell scripts that help you:
 
 - 🎨 Install popular Windows 11 themes and visual tweaks
-- 🖼️ Set up custom wallpapers and aesthetic enhancements
 - ⚙️ Configure system settings for optimal performance and appearance
 - 🚀 Automate common Windows 11 customization tasks
-
-## 🚀 Installation
-
-First, clone this repository to your machine:
-
-```bash
-git clone https://github.com/yourusername/windows-ricing/yasb.git
-```
-
-Then install the required dependencies:
-
-```powershell
-# Make sure you have PowerShell 5.1 or later
-# You may need to allow unsigned scripts to run
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-```
 
 ## ▶️ Usage
 
 Run the main PowerShell script to apply all customizations:
 
 ```powershell
-.\yasb.ps1
+   irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/yasb/yasb.ps1 | iex
 ```
 
 This script will:
