@@ -11,11 +11,11 @@ A collection of PowerShell scripts designed to automate the process of setting u
 
 - 🏠 [Home](#-yasb---yet-another-sleek-bloatware)
 - 📋 [Overview](#-overview)
-- 🚀 [Installation](#-installation)
 - ▶️ [Usage](#️-usage)
 - ⚙️ [Configuration](#️-configuration)
 - ✨ [Features](#-features)
 - 🔧 [Troubleshooting](#-troubleshooting)
+- 📂 [File Structure](#-file-structure)
 - 💬 [Support](#-support)
 - 🤝 [Contributing](#-contributing)
 - 📄 [License](#-license)
@@ -25,32 +25,15 @@ A collection of PowerShell scripts designed to automate the process of setting u
 yasb (Yet Another Sleek Bloatware) provides a comprehensive set of PowerShell scripts that help you:
 
 - 🎨 Install popular Windows 11 themes and visual tweaks
-- 🖼️ Set up custom wallpapers and aesthetic enhancements
 - ⚙️ Configure system settings for optimal performance and appearance
 - 🚀 Automate common Windows 11 customization tasks
-
-## 🚀 Installation
-
-First, clone this repository to your machine:
-
-```bash
-git clone https://github.com/yourusername/windows-ricing/yasb.git
-```
-
-Then install the required dependencies:
-
-```powershell
-# Make sure you have PowerShell 5.1 or later
-# You may need to allow unsigned scripts to run
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-```
 
 ## ▶️ Usage
 
 Run the main PowerShell script to apply all customizations:
 
 ```powershell
-.\yasb.ps1
+   irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/yasb/yasb.ps1 | iex
 ```
 
 This script will:
@@ -86,10 +69,6 @@ You can customize the behavior of the scripts by editing the `yasb.ps1` file bef
 - 💻 Run PowerShell as Administrator
 - 📁 Navigate to the project directory first
 
-**🖼️ Custom wallpapers don't appear**
-- 📂 Ensure your wallpaper folder structure is correct
-- 🖼️ Check that the image files are in PNG/JPG format
-
 **🐌 System performance slows down**
 - ⏳ This is normal during initial setup
 - 🚀 The system will stabilize after all optimizations are applied
@@ -97,6 +76,18 @@ You can customize the behavior of the scripts by editing the `yasb.ps1` file bef
 **🔍 Features are missing**
 - 📋 Check the script output for error messages
 - 🪟 Verify your Windows 11 version supports the feature
+
+## 📂 File Structure
+<pre>
+  
+yasb/
+├── Config/
+│   ├── config.yaml
+│   └── styles.css
+├── README.md
+└── yasb.ps1
+
+</pre>
 
 ## 💬 Support
 
