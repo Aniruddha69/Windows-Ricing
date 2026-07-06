@@ -66,11 +66,11 @@ if ($fontInstalled)
 }
 # 2. Install Git, PowerShell 7, and Fastfetch using Winget
 Write-Host "`nInstalling Git, PowerShell 7, and Fastfetch..." -ForegroundColor Cyan
-winget install --id Git.Git  --source winget --accept-package-agreements --accept-source-agreements
-winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements 
-winget install --id fastfetch-cli.fastfetch --source winget --accept-package-agreements --accept-source-agreements
-winget install --id Mircosoft.WindowsTerminal --source winget --accept-package-agreements --accept-source-agreements
-winget install --id JanDeDobbeleer.OhMyPosh --source winget --accept-package-agreements --accept-source-agreements 
+winget install --id Git.Git  --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
+winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
+winget install --id fastfetch-cli.fastfetch --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
+winget install --id Mircosoft.WindowsTerminal --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
+winget install --id JanDeDobbeleer.OhMyPosh --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
 # 3. Define directory paths
 $homeDir = $HOME
 $configDir = Join-Path $homeDir ".config"
