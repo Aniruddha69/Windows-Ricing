@@ -118,8 +118,8 @@ if ($fontInstalled)
 
 # downloading git and yasb via winget package manager
 
-winget install --id Git.Git  --source winget --accept-package-agreements --accept-source-agreements
-winget install --id AmN.yasb --source winget --accept-package-agreements --accept-source-agreements
+winget install --id Git.Git  --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
+winget install --id AmN.yasb --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
 
 # defining directory 
 
