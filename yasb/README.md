@@ -33,7 +33,7 @@ yasb (Yet Another Sleek Bloatware) provides a comprehensive set of PowerShell sc
 Run the main PowerShell script to apply all customizations:
 
 ```powershell
-   irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/yasb/yasb.ps1 | iex
+irm https://github.com/Aniruddha69/Windows-Ricing/raw/main/yasb/yasb.ps1 | iex
 ```
 
 This script will:
