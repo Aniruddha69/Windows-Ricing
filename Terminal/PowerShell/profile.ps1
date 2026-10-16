@@ -13,11 +13,33 @@ Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
 Set-PSReadLineKeyHandler -Chord 'Ctrl+z' -Function Undo
 Set-PSReadLineKeyHandler -Chord 'Ctrl+y' -Function Redo
 
+# 1. Initialize zoxide normally (this creates the default 'z' command)
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+# 2. Remove PowerShell's default 'cd' alias so we can overwrite it
+Remove-Item -Path Alias:cd -Force -ErrorAction SilentlyContinue
+Remove-Item -Path Alias:ls -Force -ErrorAction SilentlyContinue
+$env:EZA_CONFIG_DIR = "$env:USERPROFILE\.config\eza"
+function ls {
+    eza --long --all --header --no-user --time-style="+%d-%m-%Y %H.%M" --icons --group-directories-first -I "Application Data|Cookies|Local Settings|My Documents|NetHood|PrintHood|Recent|SendTo|Start Menu|Templates|My Music|My Pictures|My Videos|All Users|Default User|Documents and Settings|ntuser*|NTUSER*" @args
+}
+$env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe"
+
+# 3. Create our custom 'cd' function
+function cd {
+    z @args          # Passes your arguments to zoxide
+    ls    # Lists the contents of the new directory
+} 
+
 # Functions
 
 # System Utilities
 function uptime {
     (Get-Date) - (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime | Select-Object Days, Hours, Minutes, Seconds
+}
+
+function matrix {
+  Clear-Host ; rusty-rain.exe
 }
 
 function clf {
@@ -39,7 +61,7 @@ function gp { git push }
 function gpush { git push }
 function gpull { git pull }
 function gcl { git clone $args }
-function g { __zoxide_z github }
+function g { cd $HOME\Documents\GitHub}
 
 function y {
 	$tmp = (New-TemporaryFile).FullName
@@ -63,12 +85,25 @@ function lazyg {
 }
 
 function docs {
-    Set-Location -Path ([Environment]::GetFolderPath("MyDocuments"))
+  Set-Location; cd $HOME/Documents/
+}
+
+function downloads {
+  Set-Location; cd $HOME/Downloads/
+}
+
+function desktop {
+  Set-Location; cd $HOME/Desktop/
 }
 
 function Update-Profile {
-    Invoke-RestMethod https://github.com/Aniruddha69/Terminal/raw/main/terminal.ps1 | Invoke-Expression
+  Invoke-RestMethod https://github.com/Aniruddha69/Terminal/raw/main/terminal.ps1 | Invoke-Expression
 }
+
+function pipes {
+  pipes-rs.exe
+}
+
 # Help Function
 function Show-Help {
     $title    = $PSStyle.Foreground.BrightMagenta
@@ -88,6 +123,7 @@ ${section}󰊢 Update${reset}
 
 ${section}󰊢 Git Shortcuts${reset}
 ${dim}────────────────────────────────────────────────────${reset}
+
   ${command}g${reset}                  ${accent}→${reset} ${desc}Changes to the GitHub directory${reset}
   ${command}ga${reset}                 ${accent}→${reset} ${desc}git add .${reset}
   ${command}gcl <repo>${reset}         ${accent}→${reset} ${desc}git clone${reset}
@@ -99,11 +135,16 @@ ${dim}────────────────────────�
 
 ${section}󰘴 System Shortcuts${reset}
 ${dim}────────────────────────────────────────────────────${reset}
+  ${command}cd${reset}                 ${accent}→${reset} ${desc}change directory ${reset}  
+  ${command}matrix${reset}             ${accent}→${reset} ${desc}funny matrix${reset}  
   ${command}clf${reset}                ${accent}→${reset} ${desc}clear and fastfetch${reset}  
   ${command}docs${reset}               ${accent}→${reset} ${desc}Documents folder${reset}
+  ${command}downloads${reset}               ${accent}→${reset} ${desc}Downloads folder${reset}
+  ${command}desktop${reset}               ${accent}→${reset} ${desc}Desktop folder${reset}
   ${command}uptime${reset}             ${accent}→${reset} ${desc}System uptime${reset}
   ${command}winutil${reset}            ${accent}→${reset} ${desc}Run WinUtil${reset}
   ${command}winutildev${reset}         ${accent}→${reset} ${desc}Run WinUtil Dev${reset}
+  ${command}pipes${reset}             ${accent}→${reset} ${desc}funny pipes${reset}  
 
 ${dim}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${reset}
 "@
@@ -114,6 +155,7 @@ Clear-host
 if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
     fastfetch -c "$HOME/.config/fastfetch/config.jsonc"
 }
+
 
 # Minimal profile: UTF‑8 + Oh My Posh (if installed) + Fastfetch with explicit config path
 oh-my-posh init pwsh --config '~/.config/Oh-My-Posh/tokyonight.omp.json'| Invoke-Expression
