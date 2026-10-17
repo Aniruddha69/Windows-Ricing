@@ -86,7 +86,7 @@ Other
 
 | 📚 Entry | ✨ App |
 |---------------------|------------|
-| Colorscheme         | [Catppuccin Mocha](https://catppuccin.com) |
+| Colorscheme         | [TokyoNight]([https://catppuccin.com](https://github.com/wixdaq/Tokyo-Night-Themes)) |
 | Font                | [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip) |
 
 ---
